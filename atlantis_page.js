@@ -13,7 +13,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 username = localStorage.getItem("username");
 room_name = localStorage.getItem("room name");
-function send() z{
+function send() {
       msg = document.getElementById("msg").value;
       firebase.database().ref(room_name).push({
             username: username,
