@@ -13,7 +13,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 username = localStorage.getItem("username");
 room_name = localStorage.getItem("room name");
-function send() {
+function send() z{
       msg = document.getElementById("msg").value;
       firebase.database().ref(room_name).push({
             username: username,
@@ -33,9 +33,9 @@ function getData() {
                         message_data = childData;
                         //Inicia código
                         user = message_data["username"];
-                        massage = message_data["message"];
+                        message = message_data["message"];
                         like = message_data["like"];
-                        row = '<h4>' + user + '</h4><h4 class="message_h4">' + message + '</h4><button id="' + firebase_message_id + '" class="btn btn-warning" value="'+like+'" onclick="updateLike(this.id)">👍🏻'+like+'</button>'
+                        row = '<h4>' + user + '</h4><h4 class="message_h4">' + message + '</h4><button id="' + firebase_message_id + '" class="btn btn-warning" value="' + like + '" onclick="updateLike(this.id)">👍🏻' + like + '</button>'
                         document.getElementById("output").innerHTML += row;
                         //Termina código
                   }
@@ -52,4 +52,9 @@ function logout() {
 }
 function back() {
       window.location = "atlantis_room.html";
+}
+function updateLike(message_id){
+      likes = document.getElementById(message_id).value;
+      updated_Likes = Number(likes) + 1;
+      firebase.database().ref(room_name).child(message_id).update({like:updated_Likes})
 }
